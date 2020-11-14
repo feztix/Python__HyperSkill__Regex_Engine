@@ -9,18 +9,28 @@ def regEx_engine(tupple_of_splitted_string):
 
     return comparing_expr(regex_expr, input_value)
 
+
+# character-by-character comparison
+def comparison_ch_by_ch(regex_expr_ch, input_value_ch):
+    if len(regex_expr_ch) == 0:
+        return True
+    if regex_expr_ch == '.':
+        return True
+    if regex_expr_ch == input_value_ch:
+        return True
+    return False
+
+
 def comparing_expr(regex_expr, input_value):
-    if regex_expr == input_value:
+    if len(regex_expr) == 0:
         return True
-    elif len(regex_expr) == 0:
-        return True
-    elif regex_expr == ".":
-        return True
-    elif len(regex_expr) != 0 and len(input_value) == 0:
+    if len(input_value) == 0:
         return False
-    # different patterns
-    else:
+    # character-by-character comparison
+    if comparison_ch_by_ch(regex_expr[0], input_value[0]) is False:
         return False
+    return comparing_expr(regex_expr[1:], input_value[1:])
 
 
-print(regEx_engine(splitting_input()))
+if __name__ == "__main__":
+    print(regEx_engine(splitting_input()))
