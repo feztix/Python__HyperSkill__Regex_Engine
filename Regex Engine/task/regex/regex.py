@@ -7,7 +7,7 @@ def regEx_engine(tupple_of_splitted_string):
     regex_expr = tupple_of_splitted_string[0]
     input_value = tupple_of_splitted_string[1]
 
-    return comparing_expr(regex_expr, input_value)
+    return regular_express(regex_expr, input_value)
 
 
 # character-by-character comparison
@@ -30,6 +30,15 @@ def comparing_expr(regex_expr, input_value):
     if comparison_ch_by_ch(regex_expr[0], input_value[0]) is False:
         return False
     return comparing_expr(regex_expr[1:], input_value[1:])
+
+
+def regular_express(regex_expr, input_value):
+    if regex_expr == '':
+        return True
+    for i in range(len(input_value)):
+        if comparing_expr(regex_expr, input_value[i:]) is True:
+            return True
+    return False
 
 
 if __name__ == "__main__":
