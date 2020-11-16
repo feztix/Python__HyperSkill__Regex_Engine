@@ -1,4 +1,3 @@
-# write your code here
 def splitting_input(string=str(input()).split("|")):
     return string[0], string[1]
 
@@ -24,6 +23,8 @@ def comparison_ch_by_ch(regex_expr_ch, input_value_ch):
 def comparing_expr(regex_expr, input_value):
     if len(regex_expr) == 0:
         return True
+    if regex_expr == '$' and input_value == '':
+        return True
     if len(input_value) == 0:
         return False
     # character-by-character comparison
@@ -35,6 +36,8 @@ def comparing_expr(regex_expr, input_value):
 def regular_express(regex_expr, input_value):
     if regex_expr == '':
         return True
+    if regex_expr[0] == '^':
+        return comparing_expr(regex_expr[1:], input_value)
     for i in range(len(input_value)):
         if comparing_expr(regex_expr, input_value[i:]) is True:
             return True
