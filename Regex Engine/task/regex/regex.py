@@ -24,6 +24,11 @@ def comparing_expr(regex_expr, input_value):
     if len(input_value) == 0:
         return False
     if len(regex_expr) > 1:
+        if regex_expr[0] == '\\':
+            if comparison_ch_by_ch(regex_expr[1], input_value[0]) is True:
+                return comparing_expr(regex_expr[2:], input_value[1:])
+            else:
+                return False
         if (regex_expr[1] == '?' or regex_expr[1] == '*') and comparison_ch_by_ch(regex_expr[0], input_value[0]) is False:
             return comparing_expr(regex_expr[2:], input_value)
         if regex_expr[1] == '?' and comparison_ch_by_ch(regex_expr[0], input_value[0]) is True:
